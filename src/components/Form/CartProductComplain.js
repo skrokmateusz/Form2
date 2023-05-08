@@ -15,27 +15,26 @@ import { valActions } from '../../store/validity'
 const CartProductComplain = props => {
 	const dispatch = useDispatch()
 	
+	const isNextStepClicked = useSelector(state => state.val.isNextStepButtonClicked)
+	const isCorrectContent = useSelector(state => state.val.isCorrectContent)
+
 	const previousStepButtonHandler = event => {
 		event.preventDefault()
 		dispatch(navActions.navToHomePage())
 		dispatch(valActions.buttonNextStepIsNotClicked())
 	}
 	
-	const isNextStepClicked = useSelector(state => state.val.isNextStepButtonClicked)
-	const isCorrectContent = useSelector(state => state.val.isCorrectContent)
-
 	const nextStepButtonHandler = event => {
 		event.preventDefault()
 		dispatch(valActions.buttonNextStepIsClicked())
-		if (!isCorrectContent) {
-			return
+		if (isCorrectContent) {
+			dispatch(navActions.navToSubmissionCart())
 		}
 		else {
-			dispatch(navActions.navToSubmissionCart())
+			dispatch(valActions.contentIsNotCorrect())
 		} 
-			
 	}
-	
+
 	return (
 		<form>
 			<Card>

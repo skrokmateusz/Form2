@@ -51,14 +51,6 @@ const MainProductComplain = props => {
 	correctContent =
 		enteredFlavourIsValid && enteredExpirationDateIsValid && enteredMessageIsValid && enteredPurchasePlaceIsValid
 
-	useEffect(() => {
-		if (correctContent) {
-			dispatch(valActions.contentIsCorrect())
-		} else {
-			dispatch(valActions.contentIsNotCorrect())
-		}
-	}, [correctContent, dispatch])
-
 	const data = {
 		flavour: enteredFlavour,
 		expirationDate: enteredExpirationDate,
@@ -67,14 +59,13 @@ const MainProductComplain = props => {
 	}
 
 	const newData = { ...data }
-	if (correctContent) {
-		dispatch(dataActions.addData(newData))
-	}
-
-
-	// useEffect(() => {
-	// 	props.onCorrectContent(correctContent)
-	// }, [correctContent, props])
+	useEffect(() => {
+		if (correctContent && isNextStepClicked) {
+			dispatch(valActions.contentIsCorrect())
+			dispatch(dataActions.addData(newData))
+		}
+		else return
+	}, [correctContent, isNextStepClicked])
 
 	return (
 		<main>
