@@ -1,0 +1,51 @@
+main {
+	color: #8f8f8f;
+	font-size: 1.35rem;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+p {
+	font-size: 1.6rem;
+}
+
+.message {
+	min-height: 120px;
+}
+
+select {
+	padding: 1.4rem 2.8rem 1.4rem 1.4rem;
+	border: 1px solid #c8c8c8;
+	background-color: #fff;
+	border-radius: 0.5rem;
+	font-size: 1.6rem;
+}
+
+.invalid-input {
+	position: relative;
+	left: 269px;
+	width: 435px;
+}
+
+
+
+.invalid-input p {
+	margin: 0;
+	font-size: 1.35rem;
+	color: #b40e0e;
+	/* color: salmon; */
+}
+
+.invalid {
+	border: 1px solid #b40e0e;
+	/* border: 1px solid salmon; */
+	background-color: #fddddd;
+}
+
+.invalid:focus {
+	border: 1px solid #b40e0e;
+}

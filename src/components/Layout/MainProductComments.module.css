@@ -1,0 +1,27 @@
+main {
+	color: #8f8f8f;
+	font-size: 1.35rem;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+p {
+	font-size: 1.6rem;
+}
+
+.message {
+	min-height: 120px;
+}
+
+select {
+	padding: 1.4rem 2.8rem 1.4rem 1.4rem;
+	background-color: #fff;
+	border-radius: 0.5rem;
+	font-size: 1.6rem;
+}
+
+

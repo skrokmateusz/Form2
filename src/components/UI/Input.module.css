@@ -1,0 +1,47 @@
+input {
+	padding: 1.4rem;
+	margin-top: 0.5rem;
+	color: #000;
+	font-size: 1.6rem;
+	font-weight: 500;
+	border: 1px solid #c8c8c8;
+	border-radius: 0.5rem;
+	width: 100%;
+	transition: border 0.1s linear;
+	outline: none;
+}
+
+.input {
+	padding: 1rem 0;
+}
+
+label {
+	text-align: right;
+}
+
+input:focus {
+	border: 1px solid #214bff;
+	color: #000;
+}
+
+.invalid {
+	border: 1px solid #b40e0e;
+	/* border: 1px solid salmon; */
+	background-color: #fddddd;
+}
+
+@media (min-width: 992px) {
+	input {
+		width: 435px;
+	}
+
+	label {
+		width: 235px;
+	}
+
+	.input {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
+}

@@ -1,0 +1,38 @@
+.progress {
+	margin-top: 1.2rem;
+	font-size: 1.2rem;
+}
+
+.progress span {
+	margin-right: 2rem;
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+.one {
+	color: #214bff;
+}
+
+.two,
+.three {
+	color: #c8c8c8;
+}
+
+/* .active-two {
+	color: #214bff
+} */
+
+/* .active-three {
+	color: #214bff
+} */
+
+.one, .two, .three:hover {
+    cursor: pointer;
+}
+
+@media (min-width: 992px) {
+	.progress span {
+		margin-right: 0rem;
+		margin-left: 2rem;
+	}
+}

@@ -1,0 +1,26 @@
+body {
+	margin-top: 5rem;
+	display: flex;
+	justify-content: center;align-items: center;
+}
+
+
+/* footer {
+	padding: 4rem 1rem 4rem 0rem;
+	text-align: right;
+	border-bottom: 1px solid #ccc;
+}
+
+.choice-box.active {
+	border: 1px solid #214bff;
+	color: #214bff;
+}
+
+
+
+@media (min-width: 992px) {
+
+	footer {
+		padding: 4rem 0rem;
+	}
+} */
