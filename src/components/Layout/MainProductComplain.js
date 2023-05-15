@@ -12,7 +12,7 @@ import { dataActions } from '../../store/data'
 
 import classes from './MainProductComplain.module.css'
 
-const MainProductComplain = props => {
+const MainProductComplain = () => {
 	const dispatch = useDispatch()
 	const isNextStepClicked = useSelector(state => state.val.isNextStepButtonClicked)
 	const isErrorShown = useSelector(state => state.val.isErrorShown)

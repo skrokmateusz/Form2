@@ -7,6 +7,7 @@ import useOptionInput from '../../hooks/use-optionInput'
 import classes from './MainSubmission.module.css'
 import { useEffect } from 'react'
 import { dataActions } from '../../store/data'
+import { valActions } from '../../store/validity'
 
 const regExpEmail =
 	/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -16,6 +17,7 @@ const regExpNumber = /^\d{9}$/
 const MainSubmissionComplain = props => {
 	const dispatch = useDispatch()
 	const isSubmissionButtonClicked = useSelector(state => state.val.isSubmissionButtonClicked)
+	const isSubmissionErrorShown = useSelector(state => state.val.isSubmissionErrorShown)
 
 	const {
 		value: enteredName,
@@ -42,37 +44,41 @@ const MainSubmissionComplain = props => {
 	} = useInput(value => value.match(regExpNumber))
 
 	const { value: enteredAdress, valueChangeHandler: adressHandler } = useOptionInput()
-
 	const { value: enteredZipCode, valueChangeHandler: zipCodeHandler } = useOptionInput()
-
 	const { value: enteredCity, valueChangeHandler: cityHandler } = useOptionInput()
 
-	const userData = {
-		nameSurname: enteredName,
-		email: enteredEmail,
-		phoneNumber: enteredNumber,
-		adress: enteredAdress,
-		zipCode: enteredZipCode,
-		city: enteredCity,
-	}
-
-	const newUserData = { ...userData }
-
 	let correctContent = false
-	correctContent = enteredName && enteredEmail && enteredNumber
+	correctContent = enteredNameIsValid && enteredEmailIsValid && enteredNumberIsValid
 
 	useEffect(() => {
-		if (correctContent && isSubmissionButtonClicked) {
-			dispatch(dataActions.addUserData(newUserData))
+		const userData = {
+			nameSurname: enteredName,
+			email: enteredEmail,
+			phoneNumber: enteredNumber,
+			adress: enteredAdress,
+			zipCode: enteredZipCode,
+			city: enteredCity,
 		}
-	}, [correctContent, isSubmissionButtonClicked])
+		const newUserData = { ...userData }
+		if (correctContent && isSubmissionButtonClicked) {
+			console.log('ok');
+			dispatch(dataActions.addUserData(newUserData))
+			dispatch(valActions.submissionContentIsCorrect())
+
+		} else if (!correctContent && isSubmissionButtonClicked) {
+			dispatch(valActions.buttonSubmissionIsNotClicked())
+		} else {
+			return
+		}
+	}, [isSubmissionButtonClicked])
+
 
 	return (
 		<main>
 			<div>
 				<Input
 					className={`${hasNameError ? classes.invalid : ''} ${
-						isSubmissionButtonClicked && !enteredNameIsValid ? classes.invalid : ''
+						isSubmissionErrorShown && !enteredNameIsValid ? classes.invalid : ''
 					}`}
 					label="Imię i nazwisko *"
 					input={{
@@ -84,15 +90,11 @@ const MainSubmissionComplain = props => {
 					}}
 				/>
 				<div className={classes['invalid-input']}>
-					{hasNameError || (isSubmissionButtonClicked && !enteredName) ? (
-						<p>* Wypełnienie tego pola jest wymagane</p>
-					) : (
-						''
-					)}
+					{hasNameError || (isSubmissionErrorShown && !enteredName) ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
 				</div>
 				<Input
 					className={`${hasEmailError ? classes.invalid : ''} ${
-						isSubmissionButtonClicked && !enteredEmailIsValid ? classes.invalid : ''
+						isSubmissionErrorShown && !enteredEmailIsValid ? classes.invalid : ''
 					}`}
 					label="Adres e-mail *"
 					input={{
@@ -104,13 +106,13 @@ const MainSubmissionComplain = props => {
 					}}
 				/>
 				<div className={classes['invalid-input']}>
-					{isSubmissionButtonClicked && !enteredEmail ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
+					{isSubmissionErrorShown && !enteredEmail ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
 					{hasEmailError ? <p>* Adres email jest nieprawidłowy</p> : ''}
 				</div>
 
 				<Input
 					className={`${hasNumberError ? classes.invalid : ''} ${
-						isSubmissionButtonClicked && !enteredNumberIsValid ? classes.invalid : ''
+						isSubmissionErrorShown && !enteredNumberIsValid ? classes.invalid : ''
 					}`}
 					label="Numer telefonu *"
 					input={{
@@ -122,7 +124,7 @@ const MainSubmissionComplain = props => {
 					}}
 				/>
 				<div className={classes['invalid-input']}>
-					{isSubmissionButtonClicked && !enteredNumber ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
+					{isSubmissionErrorShown && !enteredNumber ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
 					{hasNumberError ? <p>* Nieprawidłowy format telefonu. Prawidłowy format 123456789</p> : ''}
 				</div>
 				<Input className={classes.inputs} label="Ulica, nr domu" onChange={adressHandler} input={{ type: 'text' }} />

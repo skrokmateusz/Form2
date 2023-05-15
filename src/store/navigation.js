@@ -30,7 +30,8 @@ const navigationSlice = createSlice({
 		},
 		navToResultCart(state) {
 			state.resultCart = true
-		}
+		},
+		
 	},
 })
 

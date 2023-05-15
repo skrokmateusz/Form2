@@ -10,6 +10,7 @@ main {
 	border-radius: 0.3rem;
 	font-size: 1.6rem;
 	height: 105px;
+	font-weight: 500;
 	color: #c8c8c8;
 }
 
@@ -22,6 +23,11 @@ main {
 	font-size: 1.6rem;
 	height: 105px;
 	color: #214bff;
+}
+
+.choice-box-clicked p {
+	color: black;
+	font-weight: 500;
 }
 
 /* .choice-box:focus-within {
