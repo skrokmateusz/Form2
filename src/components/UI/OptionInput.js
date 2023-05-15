@@ -4,12 +4,12 @@ const OptionInput = props => {
 	return (
 		<div className={classes.input}>
 			<label htmlFor="">{props.label}</label>
-			<select name={props.name} className={classes.options}>
+			<select name={props.name} className={classes.options} onChange={props.onChange}>
 				<option value="">Wybierz...</option>
-				<option value="opt1">{props.option1}</option>
-				<option value="opt2">{props.option2}</option>
-				<option value="opt3">{props.option3}</option>
-				<option value="opt4">{props.option4}</option>
+				<option value={props.option1}>{props.option1}</option>
+				<option value={props.option2}>{props.option2}</option>
+				<option value={props.option3}>{props.option3}</option>
+				<option value={props.option4}>{props.option4}</option>
 			</select>
 		</div>
 	)

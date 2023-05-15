@@ -3,12 +3,6 @@ main {
 	font-size: 1.35rem;
 }
 
-form {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-}
-
 p {
 	font-size: 1.6rem;
 }

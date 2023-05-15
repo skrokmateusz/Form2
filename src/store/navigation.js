@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = { complainCart: false, questionCart: false, commentCart: false, submissionCart: false }
+const initialState = { complainCart: false, questionCart: false, commentCart: false, submissionCart: false, resultCart: false }
 
 const navigationSlice = createSlice({
 	name: 'nav',
@@ -10,6 +10,8 @@ const navigationSlice = createSlice({
 			state.complainCart = false
 			state.questionCart = false
 			state.commentCart = false
+			state.submissionCart = false
+			state.resultCart = false
 		},
 		navToComplainCart(state) {
 			state.complainCart = true
@@ -25,6 +27,9 @@ const navigationSlice = createSlice({
 		},
 		navToPreviousCart(state) {
 			state.submissionCart = false
+		},
+		navToResultCart(state) {
+			state.resultCart = true
 		}
 	},
 })

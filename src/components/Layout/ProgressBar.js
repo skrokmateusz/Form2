@@ -7,7 +7,7 @@ const ProgressBar = props => {
 			<span className={classes.one} onClick={props.onClickOne}>
 				<i class="fa-sharp fa-solid fa-circle"></i>
 			</span>
-			<span className={`${classes.two} ${props.classNameTwo}`}onClick={props.onClickTwo}>
+			<span className={`${classes.two} ${props.classNameTwo}`} onClick={props.onClickTwo}>
 				<i class="fa-sharp fa-solid fa-circle"></i>
 			</span>
 			<span className={`${classes.three} ${props.classNameThree}`}>

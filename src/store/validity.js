@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { isNextStepButtonClicked: false, isSubmissionButtonClicked: false, isCorrectContent: false }
+const initialState = { isNextStepButtonClicked: false, isSubmissionButtonClicked: false, isCorrectContent: false, isErrorShown: false }
 
 const validitySlice = createSlice({
     name: 'val',
     initialState: initialState,
     reducers: {
+        setDefaultValues(state) {
+            state.isNextStepButtonClicked = false
+            state.isSubmissionButtonClicked = false
+            state.isCorrectContent = false
+            state.isErrorShown = false
+        },
         buttonNextStepIsClicked(state) {
             state.isNextStepButtonClicked = true
         },
@@ -23,6 +29,12 @@ const validitySlice = createSlice({
         },
         contentIsNotCorrect(state) {
             state.isCorrectContent = false
+        },
+        errorIsShown(state) {
+            state.isErrorShown = true
+        },
+        errorIsNotShown(state) {
+            state.isErrorShown = false
         }
     }
 })

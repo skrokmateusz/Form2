@@ -1,9 +1,12 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Input from '../UI/Input'
 import useInput from '../../hooks/use-input'
+import useOptionInput from '../../hooks/use-optionInput'
 
 import classes from './MainSubmission.module.css'
+import { useEffect } from 'react'
+import { dataActions } from '../../store/data'
 
 const regExpEmail =
 	/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -11,8 +14,8 @@ const regExpEmail =
 const regExpNumber = /^\d{9}$/
 
 const MainSubmissionComplain = props => {
-
-const isSubmissionButtonClicked = useSelector(state => state.val.isSubmissionButtonClicked)
+	const dispatch = useDispatch()
+	const isSubmissionButtonClicked = useSelector(state => state.val.isSubmissionButtonClicked)
 
 	const {
 		value: enteredName,
@@ -30,11 +33,39 @@ const isSubmissionButtonClicked = useSelector(state => state.val.isSubmissionBut
 		inputBlurHandler: emailBlurHandler,
 	} = useInput(value => value.match(regExpEmail))
 
-	const {value: enteredNumber,
+	const {
+		value: enteredNumber,
 		isValid: enteredNumberIsValid, //tylko do sprawdzenia poprawności całego formularza
 		hasError: hasNumberError, //do ustawienia klasy czy błędzie
 		valueChangeHandler: numberChangeHandler,
-		inputBlurHandler: numberBlurHandler,} = useInput(value => value.match(regExpNumber))
+		inputBlurHandler: numberBlurHandler,
+	} = useInput(value => value.match(regExpNumber))
+
+	const { value: enteredAdress, valueChangeHandler: adressHandler } = useOptionInput()
+
+	const { value: enteredZipCode, valueChangeHandler: zipCodeHandler } = useOptionInput()
+
+	const { value: enteredCity, valueChangeHandler: cityHandler } = useOptionInput()
+
+	const userData = {
+		nameSurname: enteredName,
+		email: enteredEmail,
+		phoneNumber: enteredNumber,
+		adress: enteredAdress,
+		zipCode: enteredZipCode,
+		city: enteredCity,
+	}
+
+	const newUserData = { ...userData }
+
+	let correctContent = false
+	correctContent = enteredName && enteredEmail && enteredNumber
+
+	useEffect(() => {
+		if (correctContent && isSubmissionButtonClicked) {
+			dispatch(dataActions.addUserData(newUserData))
+		}
+	}, [correctContent, isSubmissionButtonClicked])
 
 	return (
 		<main>
@@ -53,7 +84,11 @@ const isSubmissionButtonClicked = useSelector(state => state.val.isSubmissionBut
 					}}
 				/>
 				<div className={classes['invalid-input']}>
-					{hasNameError || (isSubmissionButtonClicked && !enteredName) ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
+					{hasNameError || (isSubmissionButtonClicked && !enteredName) ? (
+						<p>* Wypełnienie tego pola jest wymagane</p>
+					) : (
+						''
+					)}
 				</div>
 				<Input
 					className={`${hasEmailError ? classes.invalid : ''} ${
@@ -69,7 +104,7 @@ const isSubmissionButtonClicked = useSelector(state => state.val.isSubmissionBut
 					}}
 				/>
 				<div className={classes['invalid-input']}>
-					{(isSubmissionButtonClicked && !enteredEmail) ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
+					{isSubmissionButtonClicked && !enteredEmail ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
 					{hasEmailError ? <p>* Adres email jest nieprawidłowy</p> : ''}
 				</div>
 
@@ -87,12 +122,12 @@ const isSubmissionButtonClicked = useSelector(state => state.val.isSubmissionBut
 					}}
 				/>
 				<div className={classes['invalid-input']}>
-					{(isSubmissionButtonClicked && !enteredNumber) ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
+					{isSubmissionButtonClicked && !enteredNumber ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
 					{hasNumberError ? <p>* Nieprawidłowy format telefonu. Prawidłowy format 123456789</p> : ''}
 				</div>
-				<Input className={classes.inputs} label="Ulica, nr domu" input={{ type: 'text' }} />
-				<Input className={classes.inputs} label="Kod pocztowy" input={{ type: 'text' }} />
-				<Input className={classes.inputs} label="Miejscowość" input={{ type: 'text' }} />
+				<Input className={classes.inputs} label="Ulica, nr domu" onChange={adressHandler} input={{ type: 'text' }} />
+				<Input className={classes.inputs} label="Kod pocztowy" onChange={zipCodeHandler} input={{ type: 'text' }} />
+				<Input className={classes.inputs} label="Miejscowość" onChange={cityHandler} input={{ type: 'text' }} />
 				<p>* Pola oznaczone gwiazdką są wymagane</p>
 			</div>
 		</main>

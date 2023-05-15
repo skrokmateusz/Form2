@@ -6,7 +6,7 @@ const Input = props => {
     return (
         <div className={classes.input}>
             <label htmlFor={props.input.id}>{props.label}</label>
-            <input className={`${props.className}`} {...props.input}>{props.text}</input>
+            <input className={`${props.className}`} {...props.input}></input>
         </div>
     )
 }
