@@ -16,6 +16,7 @@ const MainProductComplain = () => {
 	const dispatch = useDispatch()
 	const isNextStepClicked = useSelector(state => state.val.isNextStepButtonClicked)
 	const isErrorShown = useSelector(state => state.val.isErrorShown)
+	const savedData = useSelector(state => state.data.data.registrationData)
 
 	const {
 		value: enteredFlavour,
@@ -23,7 +24,7 @@ const MainProductComplain = () => {
 		hasError: hasFlavourError, //do ustawienia klasy czy błędzie
 		valueChangeHandler: flavourChangeHandler,
 		inputBlurHandler: flavourBlurHandler,
-	} = useInput(value => value !== '')
+	} = useInput(value => value !== '', savedData.flavour)
 
 	const {
 		value: enteredExpirationDate,
@@ -31,7 +32,7 @@ const MainProductComplain = () => {
 		hasError: hasExpirationDateError, //do ustawienia klasy czy błędzie
 		valueChangeHandler: expirationDateChangeHandler,
 		inputBlurHandler: expirationDateBlurHandler,
-	} = useInput(value => value !== '')
+	} = useInput(value => value !== '', savedData.expirationDate)
 
 	const {
 		value: enteredMessage,
@@ -39,7 +40,7 @@ const MainProductComplain = () => {
 		hasError: hasMessageError, //do ustawienia klasy czy błędzie
 		valueChangeHandler: messageChangeHandler,
 		inputBlurHandler: messageBlurHandler,
-	} = useInput(value => value !== '')
+	} = useInput(value => value !== '', savedData.message)
 
 	const {
 		value: enteredPurchasePlace,
@@ -47,20 +48,32 @@ const MainProductComplain = () => {
 		hasError: hasPurchasePlaceError, //do ustawienia klasy czy błędzie
 		valueChangeHandler: purchasePlaceChangeHandler,
 		inputBlurHandler: purchasePlaceBlurHandler,
-	} = useInput(value => value !== '')
+	} = useInput(value => value !== '', savedData.purchasePlace)
 
-	const { value: enteredPackageKept, valueChangeHandler: packageKeptHandler } = useOptionInput()
-	const { value: enteredPackageType, valueChangeHandler: packageTypeHandler } = useOptionInput()
-	const { value: enteredPackageCapacity, valueChangeHandler: packageCapacityHandler } = useOptionInput()
-	const { value: enteredPackageState, valueChangeHandler: packageStateHandler } = useOptionInput()
-	const { value: enteredPackageStorageBefore, valueChangeHandler: packageStorageBeforeHandler } = useOptionInput()
-	const { value: enteredFirstOpen, valueChangeHandler: firstOpenHandler } = useOptionInput()
-	const { value: enteredPackageStorageAfter, valueChangeHandler: packageStorageAfterHandler } = useOptionInput()
-	const { value: enteredProductChange, valueChangeHandler: productChangeHandler } = useOptionInput()
+	const { value: enteredPackageKept, valueChangeHandler: packageKeptHandler } = useOptionInput(savedData.packageKept)
+	const { value: enteredPackageType, valueChangeHandler: packageTypeHandler } = useOptionInput(savedData.packageType)
+	const { value: enteredPackageCapacity, valueChangeHandler: packageCapacityHandler } = useOptionInput(
+		savedData.packageCapacity
+	)
+	const { value: enteredPackageState, valueChangeHandler: packageStateHandler } = useOptionInput(savedData.packageState)
+	const { value: enteredPackageStorageBefore, valueChangeHandler: packageStorageBeforeHandler } = useOptionInput(
+		savedData.packageStorageBefore
+	)
+	const { value: enteredFirstOpen, valueChangeHandler: firstOpenHandler } = useOptionInput(savedData.firstOpen)
+	const { value: enteredPackageStorageAfter, valueChangeHandler: packageStorageAfterHandler } = useOptionInput(
+		savedData.packageStorageAfter
+	)
+	const { value: enteredProductChange, valueChangeHandler: productChangeHandler } = useOptionInput(
+		savedData.productChange
+	)
 
 	let correctContent = false
 	correctContent =
-		enteredFlavourIsValid && enteredExpirationDateIsValid && enteredMessageIsValid && enteredPurchasePlaceIsValid
+		enteredFlavourIsValid &&
+		enteredExpirationDateIsValid &&
+		enteredMessageIsValid &&
+		enteredPurchasePlaceIsValid &&
+		enteredPackageKept
 
 	const data = {
 		flavour: enteredFlavour,
@@ -83,6 +96,7 @@ const MainProductComplain = () => {
 			dispatch(valActions.contentIsCorrect())
 			dispatch(dataActions.addData(newData))
 			dispatch(navActions.navToSubmissionCart())
+			console.log(newData)
 		} else if (!correctContent && isNextStepClicked) {
 			dispatch(valActions.buttonNextStepIsNotClicked())
 		} else {
@@ -104,6 +118,11 @@ const MainProductComplain = () => {
 					className={`${hasFlavourError ? classes.invalid : ''} ${
 						isErrorShown && !enteredFlavourIsValid ? classes.invalid : ''
 					}`}
+					tips={
+						<a href="#" data-tip="Informacja na froncie produktu">
+							<i className="fa-sharp fa-solid fa-circle-question"></i>
+						</a>
+					}
 					input={{
 						type: 'text',
 						id: 'flavour',
@@ -120,6 +139,11 @@ const MainProductComplain = () => {
 					className={`${hasExpirationDateError ? classes.invalid : ''} ${
 						isErrorShown && !enteredExpirationDateIsValid ? classes.invalid : ''
 					}`}
+					tips={
+						<a href="#" data-tip="Całościowy nadruk z opakowania: np. 05.2020 1836 L808052YX.">
+							<i className="fa-sharp fa-solid fa-circle-question"></i>
+						</a>
+					}
 					input={{
 						type: 'text',
 						id: 'expiration-date',
@@ -139,6 +163,9 @@ const MainProductComplain = () => {
 					className={`${hasMessageError ? `${classes.invalid} ${classes.message}` : classes.message} ${
 						isErrorShown && !enteredMessageIsValid ? `${classes.invalid} ${classes.message}` : classes.message
 					}`}
+					classLabel={classes['message-label']}
+					classDiv={classes['message-div']}
+					classInput={classes['message-input']}
 					label="Opis sytuacji *"
 					input={{
 						type: 'text',
@@ -155,6 +182,13 @@ const MainProductComplain = () => {
 					className={`${hasPurchasePlaceError ? classes.invalid : ''} ${
 						isErrorShown && !enteredPurchasePlaceIsValid ? classes.invalid : ''
 					}`}
+					tips={
+						<a
+							href="#"
+							data-tip="Prosimy o podanie nazwy sklepu i jego adresu. Pozwoli nam to na sprawdzenie warunków przechowywania naszych towarów">
+							<i className="fa-sharp fa-solid fa-circle-question"></i>
+						</a>
+					}
 					label="Gdzie i kiedy zakupiono produkt*"
 					input={{
 						type: 'text',
@@ -171,19 +205,26 @@ const MainProductComplain = () => {
 						''
 					)}
 				</div>
+
 				<OptionInput
-					label="Czy zostało zachowane opakowanie"
+					className={`${isErrorShown && !enteredPackageKept ? classes.invalid : ''}`}
+					label="Czy zostało zachowane opakowanie*"
 					name="is-package"
+					value={enteredPackageKept}
 					onChange={packageKeptHandler}
 					option1="tak, posiadam opakowanie wraz z produktem"
 					option2="tak, posiadam puste opakowanie"
 					option3="nie, posiadam tylko produkt"
 					option4="nie, opakowanie z produktem zostało wyrzucone"
 				/>
+				<div className={classes['invalid-input']}>
+					{isErrorShown && !enteredPurchasePlace ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
+				</div>
 				<p>Aby kompleksowo i możliwe szybko odpowiedzieć na zgłoszenie prosimy o podanie dodatkowych informacji:</p>
 				<OptionInput
 					label="Rodzaj opakowania"
 					name="package"
+					value={enteredPackageType}
 					onChange={packageTypeHandler}
 					option1="kartonik"
 					option2="karton"
@@ -193,6 +234,7 @@ const MainProductComplain = () => {
 				<OptionInput
 					label="Pojemność / gramatura"
 					name="capacity"
+					value={enteredPackageCapacity}
 					onChange={packageCapacityHandler}
 					option1="25g"
 					option2="100g"
@@ -202,26 +244,26 @@ const MainProductComplain = () => {
 				<Input
 					className={classes.inputs}
 					label="Prosimy opisać stan opakowania"
-					onChange={packageStateHandler}
-					input={{ type: 'text' }}
+					input={{ type: 'text', value: enteredPackageState, onChange: packageStateHandler }}
 				/>
 				<Input
 					className={classes.inputs}
 					label="Gdzie i jak długo produkt był przechowywany przed otwarciem"
-					onChange={packageStorageBeforeHandler}
-					input={{ type: 'text' }}
+					input={{ type: 'text', value: enteredPackageStorageBefore, onChange: packageStorageBeforeHandler }}
 				/>
-				<DateInput label="Data pierwszego otwarcia produktu" onChange={firstOpenHandler} input={{ type: 'date' }} />
+				<DateInput
+					label="Data pierwszego otwarcia produktu"
+					input={{ type: 'date', value: enteredFirstOpen, onChange: firstOpenHandler }}
+				/>
 				<Input
 					className={classes.inputs}
 					label="Gdzie i jak długo produkt był przechowywany po otwarciu"
 					onChange={packageStorageAfterHandler}
-					input={{ type: 'text' }}
+					input={{ type: 'text', value: enteredPackageStorageAfter, onChange: packageStorageAfterHandler }}
 				/>
 				<DateInput
 					label="Kiedy zauważono zmiany w produkcie"
-					onChange={productChangeHandler}
-					input={{ type: 'date' }}
+					input={{ type: 'date', value: enteredProductChange, onChange: productChangeHandler }}
 				/>
 				<p>* Pola oznaczone gwiazdką są wymagane</p>
 			</div>

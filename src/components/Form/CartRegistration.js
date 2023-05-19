@@ -38,52 +38,23 @@ const CartRegistration = props => {
 		}
 	}
 
-	// const complainContent = (
-	// 	<React.Fragment>
-	// 		<Header
-	// 			classNameTwo={classes['active-two']}
-	// 			normalTitle="Reklamacja produktowa"
-	// 			highlightedTitle="Dane produktowe"
-	// 			onClickOne={previousStepButtonHandler}
-	// 		/>
-	// 		<MainProductComplain />
-	// 	</React.Fragment>
-	// )
-
-	// const questionContent = (
-	// 	<React.Fragment>
-	// 		<Header
-	// 			classNameTwo={classes['active-two']}
-	// 			normalTitle="Pytanie dotyczące produktu, składników, itd."
-	// 			highlightedTitle="Dane produktowe"
-	// 			onClickOne={previousStepButtonHandler}
-	// 		/>
-	// 		<MainProductQuestion />
-	// 	</React.Fragment>
-	// )
-
-	// const commentsContent = (
-	// 	<React.Fragment>
-	// 		<Header
-	// 			classNameTwo={classes['active-two']}
-	// 			normalTitle="Opinie, sugestie dotyczące produktów"
-	// 			highlightedTitle="Dane produktowe"
-	// 			onClickOne={previousStepButtonHandler}
-	// 		/>
-	// 		<MainProductComments />
-	// 	</React.Fragment>
-	// )
+	let normalTitle
+	normalTitle = questionCart ? 'Reklamacja produktowa' : ''
+	normalTitle = complainCart ? 'Pytanie dotyczące produktu, składników, itd.' : ''
+	normalTitle = commentsCart ? 'Opinie, sugestie dotyczące produktów' : ''
 
 	return (
 		<div>
 			<Card>
 				<Header
 					classNameTwo={classes['active-two']}
-					normalTitle="Reklamacja produktowa"
+					normalTitle={normalTitle}
 					highlightedTitle="Dane produktowe"
 					onClickOne={previousStepButtonHandler}
 				/>
-				<MainProductComplain />
+				{complainCart && <MainProductComplain />}
+				{questionCart && <MainProductQuestion />}
+				{commentsCart && <MainProductComments />}
 			</Card>
 			<Footer className={classes.footer}>
 				<Button onClick={previousStepButtonHandler} title="" className={classes['back-button']} />

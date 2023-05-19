@@ -8,10 +8,17 @@ select {
 	font-size: 1.6rem;
     width: 100%;
     outline: none;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+
 }
 
 .input {
     padding: 1rem 0;
+}
+
+.input:focus-within {
+	color: #214bff;
 }
 
 select:hover {

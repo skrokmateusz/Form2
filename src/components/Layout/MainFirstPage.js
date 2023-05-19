@@ -17,15 +17,15 @@ const MainFirstPage = props => {
 	return (
 		<main>
 			<div onClick={choiceHandler} className={classesComplainBox} id="complain">
-				<i class="fa-sharp fa-solid fa-circle-exclamation"></i>
+				<i className="fa-sharp fa-solid fa-circle-exclamation"></i>
 				<p>Reklamacja produktowa</p>
 			</div>
 			<div onClick={choiceHandler} className={classesQuestionBox} id="question">
-				<i class="fa-sharp fa-solid fa-circle-question"></i>
+				<i className="fa-sharp fa-solid fa-circle-question"></i>
 				<p>Pytanie dotyczące produktu, składników, itd.</p>
 			</div>
 			<div onClick={choiceHandler} className={classesCommentBox} id="comment">
-				<i class="fa-sharp fa-solid fa-message"></i>
+				<i className="fa-sharp fa-solid fa-message"></i>
 				<p>Opinie, sugestie dotyczące produktów</p>
 			</div>
 		</main>

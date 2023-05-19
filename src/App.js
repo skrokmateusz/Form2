@@ -12,15 +12,11 @@ function App() {
 	const submissionCart = useSelector(state => state.nav.submissionCart)
 	const resultCart = useSelector(state => state.nav.resultCart)
 
-
 	return (
 		<div>
 			{!chosenComplainCart && !chosenQuestionCart && !chosenCommentCart && <CartTypeAction />}
-			{(chosenComplainCart || chosenQuestionCart || chosenCommentCart) && !submissionCart && <CartRegistration />}
-			
-			{chosenComplainCart && submissionCart && <CartSubmissionComplain normalTitle='Reklamacja produktowa.'/>}
-			{/* {chosenQuestionBox && submissionBox && <CartSubmission normalTitle='Pytania dotyczące produktu, składników, itd.'/>}
-			{chosenCommentBox && submissionBox && <CartSubmission normalTitle='Opinie, sugestie dotyczące produktów.'/>} */}
+			{(chosenComplainCart || chosenQuestionCart || chosenCommentCart) && !submissionCart && <CartRegistration />}		
+			{(chosenComplainCart || chosenQuestionCart || chosenCommentCart) && submissionCart  && <CartSubmissionComplain />}
 			{resultCart && <CartResult />}
 		</div>
 	)

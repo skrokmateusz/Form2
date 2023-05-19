@@ -4,7 +4,7 @@ const DateInput = props => {
 	return (
 		<div className={classes.input}>
 			<label htmlFor={props.input.id}>{props.label}</label>
-			<input className={classes.dateinput} {...props.input} />
+			<input type='date' className={`${classes.dateinput}`} {...props.input} />
 		</div>
 	)
 }

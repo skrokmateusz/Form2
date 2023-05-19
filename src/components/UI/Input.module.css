@@ -3,20 +3,22 @@ input {
 	margin-top: 0.5rem;
 	color: #000;
 	font-size: 1.6rem;
-	font-weight: 500;
 	border: 1px solid #c8c8c8;
 	border-radius: 0.5rem;
 	width: 100%;
 	transition: border 0.1s linear;
 	outline: none;
+	font-weight: 600;
+	font-family: 'Poppins', sans-serif;
+
 }
 
 .input {
 	padding: 1rem 0;
 }
 
-label {
-	text-align: right;
+.input:focus-within {
+	color: #214bff;
 }
 
 input:focus {
@@ -37,6 +39,7 @@ input:focus {
 
 	label {
 		width: 235px;
+
 	}
 
 	.input {

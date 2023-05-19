@@ -19,7 +19,7 @@ const validitySlice = createSlice({
 			state.isCorrectContent = false
 			state.isErrorShown = false
 			state.isSubmissionContentCorrect = false
-			state.isSubmissionErrorShown = false
+			state.isSubmissionContentCorrect = false
 		},
 		buttonNextStepIsClicked(state) {
 			state.isNextStepButtonClicked = true

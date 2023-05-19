@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Card from '../UI/Card'
 import Header from '../Layout/Header'
 import MainSubmissionComplain from '../Layout/MainSubmissionComplain'
+import MainSubmission from '../Layout/MainSubmission'
 import Footer from '../Layout/Footer'
 import Button from '../UI/Button'
 import { navActions } from '../../store/navigation'
@@ -15,6 +16,9 @@ import classes from './CartSubmission.module.css'
 const CartSubmissionComplain = props => {
 
 	const dispatch = useDispatch()
+	const complainCart = useSelector(state => state.nav.complainCart)
+	const questionCart = useSelector(state => state.nav.questionCart)
+	const commentsCart = useSelector(state => state.nav.commentCart)
 	const inputData = useSelector(state => state.data)
 	const correctContent = useSelector(state => state.val.isSubmissionContentCorrect)
 
@@ -62,19 +66,11 @@ const CartSubmissionComplain = props => {
 		sendData()
 	}, [correctContent])
 
-	// const complainContent = (
-	// 	<React.Fragment>
-	// 		<Header
-	// 			classNameTwo={classes['active-two']}
-	// 			classNameThree={classes['active-three']}
-	// 			normalTitle={props.normalTitle}
-	// 			highlightedTitle="Dane kontaktowe"
-	// 			onClickOne={homePageHandler}
-	// 			onClickTwo={previousPageHandler}
-	// 		/>
-	// 		<MainSubmissionComplain />
-	// 	</React.Fragment>
-	// )
+	let normalTitle
+	normalTitle = questionCart ? 'Reklamacja produktowa' : ''
+	normalTitle = complainCart ? 'Pytanie dotyczące produktu, składników, itd.' : ''
+	normalTitle = commentsCart ? 'Opinie, sugestie dotyczące produktów' : ''
+
 
 	return (
 		<form onSubmit={submitHandler}>
@@ -82,12 +78,14 @@ const CartSubmissionComplain = props => {
 				<Header
 					classNameTwo={classes['active-two']}
 					classNameThree={classes['active-three']}
-					normalTitle={props.normalTitle}
+					normalTitle={normalTitle}
 					highlightedTitle="Dane kontaktowe"
 					onClickOne={homePageHandler}
 					onClickTwo={previousPageHandler}
 				/>
-				<MainSubmissionComplain />
+				{complainCart && <MainSubmissionComplain />}
+				{questionCart && <MainSubmission />}
+				{commentsCart && <MainSubmission />}
 			</Card>
 			<Footer className={classes.footer}>
 				<Button onClick={previousPageHandler} title="" className={classes['back-button']} />

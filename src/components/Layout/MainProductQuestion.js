@@ -4,14 +4,12 @@ import OptionInput from '../UI/OptionInput'
 import classes from './MainProductQuestion.module.css'
 
 const MainProductQuestion = props => {
+	
+	
+	
+	
+	
 	return (
-
-
-
-
-
-
-
 		<main>
 			<div>
 

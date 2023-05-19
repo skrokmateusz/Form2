@@ -30,22 +30,18 @@ main {
 	font-weight: 500;
 }
 
-/* .choice-box:focus-within {
-	border: 5px solid red;
-} */
-
-
-
 .choice-box i {
 	width: 105px;
 	font-size: 4.8rem;
 	text-align: center;
+	margin-bottom: 2rem;
 }
 
 .choice-box-clicked i {
 	width: 105px;
 	font-size: 4.8rem;
 	text-align: center;
+	margin-bottom: 2rem;
 }
 
 .choice-box:hover {

@@ -1,18 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;1,500;1,700&family=Poppins:wght@400;600;700&display=swap');
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 html {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 62.5%;
-  background-color: #fff;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 62.5%;
+	background-color: #fff;
 }
 
 body {
-  margin: 0;
-  background-color: #fff;
-  display: flex;
+	margin: 0;
+	background-color: #fff;
+	display: flex;
 }
-
