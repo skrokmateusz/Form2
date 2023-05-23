@@ -8,9 +8,10 @@
     width: 200px;
     transition: border .3s linear;
     display: flex;
-    outline: none;
-    font-weight: 600;
+
 	font-family: 'Poppins', sans-serif;
+    letter-spacing: .2px;
+font-weight: 500;
 }
 
 .datepicker-input {

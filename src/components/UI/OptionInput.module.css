@@ -7,10 +7,10 @@ select {
 	border-radius: 0.5rem;
 	font-size: 1.6rem;
     width: 100%;
-    outline: none;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
 
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: .2px;
+    font-weight: 500;
 }
 
 .input {

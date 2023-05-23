@@ -20,8 +20,27 @@ p {
 	word-break: break-all;
 }
 
-.message-input {
+.textarea-div {
+	display: flex;
+	flex-direction: column;
+}
+
+.textarea-label {
+	align-items: flex-start;
+	margin-top: 1.5rem;
+}
+
+.textarea {
+	margin: 0.5em 0;
+	padding: 1.4rem;
 	min-height: 120px;
+	width: 100%;
+	border-radius: 0.5rem;
+	border: 1px solid #c8c8c8;
+	font-size: 1.6rem;
+	letter-spacing: 0.2px;
+	font-weight: 500;
+	font-family: 'Poppins', sans-serif;
 }
 
 a {
@@ -40,6 +59,12 @@ select {
 	font-size: 1.6rem;
 }
 
+.dragdrop-div {
+	display: flex;
+	flex-direction: column;
+	margin: 1rem 0;
+}
+
 .invalid-input {
 	text-align: left;
 	width: 435px;
@@ -52,6 +77,10 @@ select {
 }
 
 .invalid {
+	border: 1px solid #b40e0e;
+}
+
+.invalid-textarea {
 	border: 1px solid #b40e0e;
 }
 
@@ -129,6 +158,8 @@ select {
 		width: 435px;
 	}
 
+	
+
 	.message-div {
 		display: flex;
 		flex-direction: row;
@@ -145,24 +176,39 @@ select {
 	.message-input {
 		display: flex;
 		align-items: flex-start;
-
 	}
 
-	.file::file-selector-button{
-		opacity: 0;
-		width: 0.1px;
-		height: 0.1px;
-		position: absolute;
+	.dragdrop {
+		width: 100%;
 	}
 
-	.file {
-text-align: center;
-		/* background-color: #8f8f8f; */
-		background-color: #c8c8c8;
-		height: 76px;
+	.dragdrop-div {
+		flex-direction: row;
 	}
 
-	/* input[type=file] {
-		background-color: lime;
-	} */
+	.textarea-div {
+		display: flex;
+		flex-direction: row;
+		margin-top: 1rem;
+	}
+
+	.textarea-label {
+		align-items: flex-start;
+		margin-top: 2rem;
+	}
+
+	.textarea {
+		min-height: 120px;
+		width: 435px;
+		border-radius: 0.5rem;
+		border: 1px solid #c8c8c8;
+		font-size: 1.6rem;
+		letter-spacing: 0.2px;
+		font-weight: 500;
+		font-family: 'Poppins', sans-serif;
+	}
+
+	.invalid-textarea {
+		border: 1px solid #b40e0e;
+	}
 }

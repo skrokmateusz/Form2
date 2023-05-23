@@ -9,10 +9,17 @@ import DateInput from '../UI/DateInput'
 import { navActions } from '../../store/navigation'
 import { valActions } from '../../store/validity'
 import { dataActions } from '../../store/data'
+import FileUploader from '../UI/FileUploader'
+import FileUploader2 from '../UI/FileUploader2'
+import DragDropFiles from '../UI/dragdrop2'
+import DragDrop2 from '../UI/dragdrop2'
 
 import classes from './MainProductComplain.module.css'
+import DragDrop from '../UI/DragAndDrop'
 
 const MainProductComplain = () => {
+	const [attachedPicture, setAttachedPicture] = useState({})
+
 	const dispatch = useDispatch()
 	const isNextStepClicked = useSelector(state => state.val.isNextStepButtonClicked)
 	const isErrorShown = useSelector(state => state.val.isErrorShown)
@@ -67,6 +74,10 @@ const MainProductComplain = () => {
 		savedData.productChange
 	)
 
+	const uploadPicture = picture => {
+		setAttachedPicture(picture)
+	}
+
 	let correctContent = false
 	correctContent =
 		enteredFlavourIsValid &&
@@ -88,6 +99,7 @@ const MainProductComplain = () => {
 		firstOpen: enteredFirstOpen,
 		packageStorageAfter: enteredPackageStorageAfter,
 		productChange: enteredProductChange,
+
 	}
 
 	const newData = { ...data }
@@ -159,7 +171,7 @@ const MainProductComplain = () => {
 						''
 					)}
 				</div>
-				<Input
+				{/* <Input
 					className={`${hasMessageError ? `${classes.invalid} ${classes.message}` : classes.message} ${
 						isErrorShown && !enteredMessageIsValid ? `${classes.invalid} ${classes.message}` : classes.message
 					}`}
@@ -177,7 +189,33 @@ const MainProductComplain = () => {
 				/>
 				<div className={classes['invalid-input']}>
 					{hasMessageError || (isErrorShown && !enteredMessage) ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
+				</div> */}
+
+				<div className={classes['textarea-div']}>
+					<label className={classes['textarea-label']} htmlFor="textarea">
+						<div>Opis sytuacji*</div>
+					</label>
+					<textarea
+						className={`${hasMessageError ? `${classes['invalid-textarea']} ${classes.textarea}` : classes.textarea}} ${
+							isErrorShown && !enteredMessageIsValid
+								? `${classes['invalid-textarea']} ${classes.textarea}`
+								: classes.textarea
+						}`}
+						value={enteredMessage}
+						onChange={messageChangeHandler}
+						onBlur={messageBlurHandler}
+						input={{
+							type: 'text',
+							id: 'message',
+							value: enteredMessage,
+							onChange: messageChangeHandler,
+							onBlur: messageBlurHandler,
+						}}></textarea>
 				</div>
+				<div className={classes['invalid-input']}>
+					{hasMessageError || (isErrorShown && !enteredMessage) ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
+				</div>
+
 				<Input
 					className={`${hasPurchasePlaceError ? classes.invalid : ''} ${
 						isErrorShown && !enteredPurchasePlaceIsValid ? classes.invalid : ''
@@ -220,6 +258,20 @@ const MainProductComplain = () => {
 				<div className={classes['invalid-input']}>
 					{isErrorShown && !enteredPurchasePlace ? <p>* Wypełnienie tego pola jest wymagane</p> : ''}
 				</div>
+				<div className={classes['dragdrop-div']}>
+					<label htmlFor="text">
+						<div className={classes.description}>Prosimy o dołączenie zdjęć opakowania i produktu</div>
+						<div>
+							<a
+								href="#"
+								data-tip="Prosimy o zrobienie zdjęć min. całego opakowania oraz zamknięcia. Mile widzane będą zdjęcia każdej strony produktu">
+								<i className="fa-sharp fa-solid fa-circle-question"></i>
+							</a>
+						</div>
+					</label>
+					<DragDrop2 />
+				</div>
+
 				<p>Aby kompleksowo i możliwe szybko odpowiedzieć na zgłoszenie prosimy o podanie dodatkowych informacji:</p>
 				<OptionInput
 					label="Rodzaj opakowania"

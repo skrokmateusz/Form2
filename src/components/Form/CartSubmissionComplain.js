@@ -48,7 +48,7 @@ const CartSubmissionComplain = props => {
 				console.log('ok');
 	
 				const response = await fetch(
-					'https://form-17894-default-rtdb.europe-west1.firebasedatabase.app/registration.json',
+					'https://form-17894-default-rtdb.europe-west1.firebasedatabase.app/registration',
 					{
 						method: 'POST',
 						body: JSON.stringify(inputData),

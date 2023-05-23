@@ -26,6 +26,7 @@ const dataSlice = createSlice({
 				firstOpen: newData.firstOpen,
 				packageStorageAfter: newData.packageStorageAfter,
 				productChange: newData.productChange,
+
 			}
 		},
 		addUserData(state, action) {

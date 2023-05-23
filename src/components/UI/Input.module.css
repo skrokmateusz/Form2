@@ -7,9 +7,9 @@ input {
 	border-radius: 0.5rem;
 	width: 100%;
 	transition: border 0.1s linear;
-	outline: none;
-	font-weight: 600;
 	font-family: 'Poppins', sans-serif;
+	letter-spacing: .2px;
+font-weight: 500;
 
 }
 
@@ -46,5 +46,6 @@ input:focus {
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
+		letter-spacing: .2px;
 	}
 }

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import Modal from '../UI/Modal'
 import Button from '../UI/Button'
+import LoadingSpinner from '../UI/LoadingSpinner'
 import { navActions } from '../../store/navigation'
 import { valActions } from '../../store/validity'
 
@@ -15,7 +16,7 @@ const CartResult = props => {
     const didSubmit = useSelector(state => state.submit.didSubmit)
 
 
-	const sendingForm = <p>Wysyłanie ...</p>
+	const sendingForm = <LoadingSpinner />
 
     const hideResultCartHandler = () => {
             dispatch(navActions.navToHomePage())
