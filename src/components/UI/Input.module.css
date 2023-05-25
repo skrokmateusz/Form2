@@ -10,7 +10,7 @@ input {
 	font-family: 'Poppins', sans-serif;
 	letter-spacing: .2px;
 font-weight: 500;
-
+outline: none;
 }
 
 .input {

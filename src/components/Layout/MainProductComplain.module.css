@@ -23,11 +23,11 @@ p {
 .textarea-div {
 	display: flex;
 	flex-direction: column;
+
 }
 
-.textarea-label {
-	align-items: flex-start;
-	margin-top: 1.5rem;
+.textarea-div:focus-within {
+	color: #214bff;
 }
 
 .textarea {
@@ -41,6 +41,12 @@ p {
 	letter-spacing: 0.2px;
 	font-weight: 500;
 	font-family: 'Poppins', sans-serif;
+	outline: none;
+}
+
+.textarea:focus {
+	border: 1px solid #214bff;
+	color: #000;
 }
 
 a {
@@ -177,6 +183,8 @@ select {
 		display: flex;
 		align-items: flex-start;
 	}
+
+
 
 	.dragdrop {
 		width: 100%;

@@ -4,7 +4,7 @@ const initialState = {
 	data: {
 		registrationData: {},
 		userData: {},
-	},
+		uploadFiles: []},
 }
 
 const dataSlice = createSlice({
@@ -40,6 +40,10 @@ const dataSlice = createSlice({
 				city: newUserData.city,
 			}
 		},
+		uploadFiles(state, action) {
+			const newUploadfiles = action.payload
+			state.data.uploadFiles = newUploadfiles
+		}
 		
 	},
 })

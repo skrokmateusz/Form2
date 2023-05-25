@@ -9,13 +9,9 @@ import DateInput from '../UI/DateInput'
 import { navActions } from '../../store/navigation'
 import { valActions } from '../../store/validity'
 import { dataActions } from '../../store/data'
-import FileUploader from '../UI/FileUploader'
-import FileUploader2 from '../UI/FileUploader2'
-import DragDropFiles from '../UI/dragdrop2'
-import DragDrop2 from '../UI/dragdrop2'
+import FileInput from '../UI/FileInput'
 
 import classes from './MainProductComplain.module.css'
-import DragDrop from '../UI/DragAndDrop'
 
 const MainProductComplain = () => {
 	const [attachedPicture, setAttachedPicture] = useState({})
@@ -269,7 +265,7 @@ const MainProductComplain = () => {
 							</a>
 						</div>
 					</label>
-					<DragDrop2 />
+					<FileInput />
 				</div>
 
 				<p>Aby kompleksowo i możliwe szybko odpowiedzieć na zgłoszenie prosimy o podanie dodatkowych informacji:</p>
